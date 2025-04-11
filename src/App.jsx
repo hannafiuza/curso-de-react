@@ -17,7 +17,7 @@ function App() {
     const fetchTasks = async () => {
       if (tasks.length === 0) {
         const response = await fetch(
-          "https://jsonplaceholder.typicode.com/todos?_limit=5",
+          "https://jsonplaceholder.typicode.com/todos?_limit=0",
           {
             method: "GET",
           }
@@ -49,6 +49,7 @@ function App() {
   function onDeleteTaskClick(taskId) {
     const newTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
   }
 
   function onAddTaskSubmit(title, description) {
@@ -67,7 +68,7 @@ function App() {
   }
 
   return (
-    <div className="w-screen h-screen bg-pink-100 flex justify-center p-6">
+    <div className="w-screen h-screen bg-pink-100 flex justify-center p-6 overflow-y-auto">
       <div className="w-[500px] space-y-4 bg-pink-100 p-6">
         <img src={logo} alt="logo" className="mx-auto mb-4" />
         <h1 className="text-3xl text-pink-500 font-bold text-center">
